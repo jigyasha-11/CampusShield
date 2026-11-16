@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan History | CampusShield</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #07111f;
+            color: white;
+        }
+
+        nav {
+            background: #0d1b2a;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #26394e;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #39b8ff;
+        }
+
+        nav a {
+            color: #39b8ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 45px auto;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #9fb3c8;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #0d1b2a;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #26394e;
+        }
+
+        th {
+            background: #13263a;
+            color: #39b8ff;
+        }
+
+        td {
+            color: #d7e2ed;
+        }
+
+        .safe {
+            color: #35d07f;
+            font-weight: bold;
+        }
+
+        .suspicious {
+            color: #ffbd3d;
+            font-weight: bold;
+        }
+
+        .high {
+            color: #ff5d68;
+            font-weight: bold;
+        }
+
+        .reported {
+            color: #ff5d68;
+            font-weight: bold;
+        }
+
+        .not-reported {
+            color: #9fb3c8;
+        }
+
+        .content {
+            max-width: 350px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">Campus<span>Shield</span></div>
+    <a href="{{ url_for('home') }}">← Back to Scanner</a>
+</nav>
+
+<div class="container">
+
+    <h1>📋 Scan & Threat History</h1>
+
+    <p class="subtitle">
+        Structured security records stored in the CampusShield SQLite database.
+    </p>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Scanned Content</th>
+            <th>Risk Score</th>
+            <th>Status</th>
+            <th>Reported</th>
+            <th>Date & Time</th>
+        </tr>
+
+        {% for scan in scans %}
+
+        <tr>
+            <td>{{ scan["id"] }}</td>
+
+            <td class="content">
+                {{ scan["content"] }}
+            </td>
+
+            <td>
+                {{ scan["score"] }}/100
+            </td>
+
+            <td>
+                {% if scan["status"] == "SAFE" %}
+                    <span class="safe">SAFE</span>
+
+                {% elif scan["status"] == "SUSPICIOUS" %}
+                    <span class="suspicious">SUSPICIOUS</span>
+
+                {% else %}
+                    <span class="high">HIGH RISK</span>
+                {% endif %}
+            </td>
+
+            <td>
+                {% if scan["reported"] == 1 %}
+                    <span class="reported">YES 🚨</span>
+                {% else %}
+                    <span class="not-reported">NO</span>
+                {% endif %}
+            </td>
+
+            <td>{{ scan["scan_time"] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusShield | Phishing Detection</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #07111f;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: #0d1b2a;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #24364b;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #39b8ff;
+        }
+
+        .badge {
+            color: #9fb3c8;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 55px auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: #39b8ff;
+        }
+
+        .hero p {
+            color: #a9bbce;
+            line-height: 1.6;
+            font-size: 17px;
+        }
+
+        .scanner {
+            background: #0d1b2a;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #26394e;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+        }
+
+        .scanner h2 {
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #9fb3c8;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 16px;
+            border-radius: 9px;
+            border: 1px solid #344a61;
+            background: #07111f;
+            color: white;
+            font-size: 15px;
+            resize: vertical;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #39b8ff;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #168eea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0879ca;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 22px;
+            border-radius: 10px;
+            background: #101f30;
+            border: 1px solid #344a61;
+        }
+
+        .result h2 {
+            margin-bottom: 10px;
+        }
+
+        .score {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 10px 0 18px;
+        }
+
+        .SAFE {
+            color: #35d07f;
+        }
+
+        .SUSPICIOUS {
+            color: #ffbd3d;
+        }
+
+        .HIGH-RISK {
+            color: #ff5d68;
+        }
+
+        .reasons {
+            margin-top: 15px;
+        }
+
+        .reasons li {
+            margin: 9px 0 9px 20px;
+            color: #d5e0eb;
+        }
+
+        .recommendation {
+            margin-top: 18px;
+            padding: 15px;
+            background: #07111f;
+            border-left: 4px solid #39b8ff;
+            line-height: 1.5;
+        }
+
+        .history-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #39b8ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .feature {
+            background: #0d1b2a;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #26394e;
+            text-align: center;
+        }
+
+        .feature h3 {
+            color: #39b8ff;
+            margin-bottom: 7px;
+            font-size: 16px;
+        }
+
+        .feature p {
+            color: #9fb3c8;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        footer {
+            text-align: center;
+            color: #70869d;
+            padding: 25px;
+            font-size: 13px;
+        }
+
+        @media(max-width: 700px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        Campus<span>Shield</span>
+    </div>
+
+    <div class="badge">
+        CyberSafe Campus Project
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="hero">
+
+        <h1>
+            Think Before You <span>Click.</span>
+        </h1>
+
+        <p>
+            Analyse suspicious links, emails, SMS and messages
+            for common phishing and social-engineering indicators.
+        </p>
+
+    </div>
+
+
+    <div class="scanner">
+
+        <h2>Security Scanner</h2>
+
+        <p class="description">
+            Paste a URL or suspicious message below to perform
+            a risk assessment.
+        </p>
+
+
+        <form method="POST">
+
+            <textarea
+                name="content"
+                maxlength="2000"
+                placeholder="Example: URGENT! Your account is suspended. Verify your password now at http://example.com"
+                required></textarea>
+
+            <button type="submit">
+                🛡 Analyse Threat
+            </button>
+
+        </form>
+
+
+        {% if result %}
+
+        <div class="result">
+
+            <h2>
+                Result:
+                <span class="{{ result.status.replace(' ', '-') }}">
+                    {{ result.status }}
+                </span>
+            </h2>
+
+
+            <div class="score">
+                Risk Score: {{ result.score }}/100
+            </div>
+
+
+            <h3>Detected Indicators</h3>
+
+            <ul class="reasons">
+
+                {% for reason in result.reasons %}
+
+                    <li>{{ reason }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+
+            <div class="recommendation">
+
+                <strong>
+                    Security Recommendation:
+                </strong>
+
+                <br>
+
+                {{ result.recommendation }}
+
+            </div>
+
+
+            <form
+                action="{{ url_for('report_threat', scan_id=result.id) }}"
+                method="POST">
+
+                <button type="submit">
+                    🚨 Report This Threat
+                </button>
+
+            </form>
+
+
+            <a
+                href="{{ url_for('history') }}"
+                class="history-link">
+
+                📋 View Scan History
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="features">
+
+        <div class="feature">
+
+            <h3>🔗 URL Analysis</h3>
+
+            <p>
+                Checks suspicious URL characteristics,
+                insecure links and shortened URLs.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <h3>🎣 Phishing Detection</h3>
+
+            <p>
+                Detects common scam, urgency and
+                credential-request indicators.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <h3>🛡 Risk Assessment</h3>
+
+            <p>
+                Provides a risk score, classification
+                and understandable security explanation.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+    CampusShield • Developed by Jigyasha Sharma •
+    B.Tech CSE – Cyber Security & Forensic Science
+</footer>
+
+</body>
+</html>
